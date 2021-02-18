@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import SearchBar from "./SearchBar/SearchBar.js";
+import Table from "./Table/Table.js";
+import campaigns from "./utils/data.json";
+import React, { useState } from "react";
 
 function App() {
+  const [searchText, setsearchText] = useState("");
+
+  const filteredData = [];
+  campaigns.forEach(campaign => {
+    if (campaign.name.toLowerCase().indexOf(searchText.toLowerCase()) === -1) {
+      return;
+    }
+    filteredData.push(campaign);
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBar searchText={searchText} setsearchText={setsearchText} />
+      <Table campaigns={filteredData} />
     </div>
   );
 }
