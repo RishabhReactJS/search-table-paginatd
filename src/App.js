@@ -6,7 +6,7 @@ import campaigns from "./utils/data.json";
 import React, { useState } from "react";
 
 function App() {
-  const [searchText, setsearchText] = useState("");
+  const [searchText, setsearchText] = useState();
 
   const filteredData = [];
   campaigns.forEach(campaign => {
